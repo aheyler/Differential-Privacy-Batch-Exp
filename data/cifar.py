@@ -3,9 +3,9 @@ import torch
 
 DATA_ROOT = '../cifar10'
 
-def generate_cifar_datasets(BATCH_SIZE, transform): 
+def generate_cifar_datasets(BATCH_SIZE, transform, download=False): 
     train_dataset = CIFAR10(
-        root=DATA_ROOT, train=True, download=True, transform=transform)
+        root=DATA_ROOT, train=True, download=download, transform=transform)
     
     train_len = int(len(train_dataset) * 0.8)
     val_len = len(train_dataset) - train_len
@@ -28,7 +28,7 @@ def generate_cifar_datasets(BATCH_SIZE, transform):
     )
 
     test_dataset = CIFAR10(
-        root=DATA_ROOT, train=False, download=True, transform=transform)
+        root=DATA_ROOT, train=False, download=download, transform=transform)
 
     test_loader = torch.utils.data.DataLoader(
         test_dataset,

@@ -4,10 +4,10 @@ import data
 from torchvision.datasets import MNIST, EMNIST
 import torch 
 
-def generate_mnist_datasets(BATCH_SIZE, transform): 
+def generate_mnist_datasets(BATCH_SIZE, transform, download=False): 
     DATA_ROOT = '../mnist'
     train_dataset = MNIST(
-        root=DATA_ROOT, train=True, download=True, transform=transform)
+        root=DATA_ROOT, train=True, download=download, transform=transform)
     
     train_len = int(len(train_dataset) * 0.8)
     val_len = len(train_dataset) - train_len
@@ -30,7 +30,7 @@ def generate_mnist_datasets(BATCH_SIZE, transform):
     )
 
     test_dataset = MNIST(
-        root=DATA_ROOT, train=False, download=True, transform=transform)
+        root=DATA_ROOT, train=False, download=download, transform=transform)
 
     test_loader = torch.utils.data.DataLoader(
         test_dataset,
@@ -44,7 +44,7 @@ def generate_mnist_datasets(BATCH_SIZE, transform):
 def generate_emnist_datasets(BATCH_SIZE, transform): 
     DATA_ROOT = '../emnist'
     train_dataset = EMNIST(
-        root=DATA_ROOT, train=True, download=True, transform=transform)
+        root=DATA_ROOT, train=True, download=download, transform=transform)
     
     train_len = int(len(train_dataset) * 0.8)
     val_len = len(train_dataset) - train_len
@@ -67,7 +67,7 @@ def generate_emnist_datasets(BATCH_SIZE, transform):
     )
 
     test_dataset = EMNIST(
-        root=DATA_ROOT, train=False, download=True, transform=transform)
+        root=DATA_ROOT, train=False, download=download, transform=transform)
 
     test_loader = torch.utils.data.DataLoader(
         test_dataset,
