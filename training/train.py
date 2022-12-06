@@ -1,63 +1,82 @@
 import torch
+import warnings
+warnings.simplefilter("ignore")
+import torch.nn as nn
+import numpy as np
+from opacus.utils.batch_memory_manager import BatchMemoryManager
 
-def train(device, net, optimizer, scheduler, criterion, train_loader, test_loader, epochs):
-    model = net.to(device)
-    total_step = len(train_loader)
-    train_loss_values = []
-    train_error = []
-    val_loss_values = []
-    val_error = []
-    for epoch in range(epochs):
-        correct = 0
-        total = 0
-        flag = 0
-        running_loss = 0.0
+def accuracy(preds, labels):
+    return (preds == labels).mean()
 
-        for i, (images, labels) in enumerate(train_loader):
-            # Move tensors to configured device
-            images = images.to(device)
-            labels = labels.to(device)
-            #Forward Pass
-            outputs = model(images)
-            loss = criterion(outputs, labels)
-            optimizer.zero_grad()
-            loss.backward()
-            running_loss += loss.item()
-            _, predicted = torch.max(outputs.data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-            optimizer.step()
-            if (i+1) % 1000 == 0:
-              print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(epoch+1, epochs, i+1, total_step, loss.item()))
+def train(model, train_loader, optimizer, epoch, device, privacy_engine, MAX_PHYSICAL_BATCH_SIZE, EPSILON, DELTA):
+    model.train()
+    criterion = nn.CrossEntropyLoss()
 
-        train_loss_values.append(running_loss)
-        train_error.append(100-100*correct/total)
-        
-        val_acc, avg_val_loss = eval(device, model, test_loader)
-
-        print('Accuracy of the network on the test images: {} %'.format(100 * val_acc))
-        val_error.append(100-100*val_acc)
-        val_loss_values.append(avg_val_loss)
-        scheduler.step()
-    return val_error, val_loss_values, train_error, train_loss_values
-
-
-def eval(device, model, criterion, test_loader): 
-    model.eval()
-    with torch.no_grad():
-        correct = 0
-        total = 0
-        loss = 0
-        
-        for i, (images, labels) in enumerate(test_loader):
-            images = images.to(device)
-            labels = labels.to(device)
-            outputs = model(images)
-            _, predicted = torch.max(outputs.data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-            loss += criterion(labels, outputs).item()
+    losses = []
+    top1_acc = []
     
-    accuracy = correct / total
-    avg_val_loss = loss / total
-    return accuracy, avg_val_loss
+    with BatchMemoryManager(
+        data_loader=train_loader, 
+        max_physical_batch_size=MAX_PHYSICAL_BATCH_SIZE, 
+        optimizer=optimizer
+    ) as memory_safe_data_loader:
+
+        for i, (images, target) in enumerate(memory_safe_data_loader):   
+            optimizer.zero_grad()
+            images = images.to(device)
+            target = target.to(device)
+
+            # FORWARD PASS: compute output
+            output = model(images)
+            loss = criterion(output, target)
+
+            preds = np.argmax(output.detach().cpu().numpy(), axis=1)
+            labels = target.detach().cpu().numpy()
+
+            # measure accuracy and record loss
+            acc = accuracy(preds, labels)
+
+            losses.append(loss.item())
+            top1_acc.append(acc)
+
+            loss.backward()
+            optimizer.step()
+
+            if (i+1) % 200 == 0:
+                epsilon = privacy_engine.get_epsilon(DELTA)
+                print(
+                    f"\tTrain Epoch: {epoch} \t"
+                    f"Loss: {np.mean(losses):.6f} "
+                    f"Acc@1: {np.mean(top1_acc) * 100:.6f} "
+                    f"(ε spent so far = {epsilon:.2f}, δ = {DELTA})"
+                )
+
+
+def test(model, test_loader, device):
+    model.eval()
+    criterion = nn.CrossEntropyLoss()
+    losses = []
+    top1_acc = []
+
+    with torch.no_grad():
+        for images, target in test_loader:
+            images = images.to(device)
+            target = target.to(device)
+
+            output = model(images)
+            loss = criterion(output, target)
+            preds = np.argmax(output.detach().cpu().numpy(), axis=1)
+            labels = target.detach().cpu().numpy()
+            acc = accuracy(preds, labels)
+
+            losses.append(loss.item())
+            top1_acc.append(acc)
+
+    top1_avg = np.mean(top1_acc)
+
+    print(
+        f"\tTest set:"
+        f"Loss: {np.mean(losses):.6f} "
+        f"Acc: {top1_avg * 100:.6f} "
+    )
+    return np.mean(top1_acc)

@@ -1,2 +1,3 @@
 from models.resnet import WideResnet34
 from data.mnist import MNISTDataset
+from training.train import train, test, accuracy
