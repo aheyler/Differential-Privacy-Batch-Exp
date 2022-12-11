@@ -21,11 +21,13 @@ BATCH_SIZE = 32
 MAX_PHYSICAL_BATCH_SIZE = 128
 
 if DATASET == "cifar10": 
-    CIFAR10_MEAN = (0.485, 0.456, 0.406)
-    CIFAR10_STD_DEV = (0.229, 0.224, 0.225)
+    CIFAR10_MEAN = (0.4914, 0.4822, 0.4465)
+    CIFAR10_STD_DEV = (0.2023, 0.1994, 0.2010) 
     transform = transforms.Compose([
                     transforms.ToTensor(),
                     transforms.Normalize(CIFAR10_MEAN, CIFAR10_STD_DEV),
+                    transforms.RandomHorizontalFlip(p=0.5), 
+                    transforms.RandomCrop(size=(1,1))
                 ])
     train_loader, val_loader, test_loader = generate_cifar_datasets(BATCH_SIZE, transform)
 
@@ -54,15 +56,14 @@ else:
 
 ########################## Model Instantiation & Fixing #################################
 # model = WideResnet50()
-# model = torchvision.models.resnet18(num_classes=10)
-model = torch.hub.load('pytorch/vision:v0.10.0', 'wide_resnet50_2', pretrained=True) #angie's suggestion to use wide_resnet_40
+model = torchvision.models.resnet18(num_classes=10)
 
 #hyperparameters
-MAX_GRAD_NORM = 1.2 #maximum L2 norm of per-sample gradients before they are aggregated by the averaging step
-EPSILON = 6
+MAX_GRAD_NORM = 1.0 #maximum L2 norm of per-sample gradients before they are aggregated by the averaging step
+EPSILON = 6.0
 DELTA = 1e-5 #target of the (epsilon, delta)-DP guarantee. Generally, should be set less than inverse of the size of the training dataset. 
-EPOCHS = 20
-LR = 1e-3
+EPOCHS = 100
+LR = 1e-1
 
 # "Fix" model since BatchNorm is not DP-compatible
 model = ModuleValidator.fix(model)
