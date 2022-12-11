@@ -21,8 +21,8 @@ BATCH_SIZE = 32
 MAX_PHYSICAL_BATCH_SIZE = 128
 
 if DATASET == "cifar10": 
-    CIFAR10_MEAN = (0.4914, 0.4822, 0.4465)
-    CIFAR10_STD_DEV = (0.2023, 0.1994, 0.2010) 
+    CIFAR10_MEAN = (0.485, 0.456, 0.406)
+    CIFAR10_STD_DEV = (0.229, 0.224, 0.225) 
     transform = transforms.Compose([
                     transforms.ToTensor(),
                     transforms.Normalize(CIFAR10_MEAN, CIFAR10_STD_DEV),
@@ -54,8 +54,8 @@ else:
 
 ########################## Model Instantiation & Fixing #################################
 # model = WideResnet50()
-model = torchvision.models.resnet18(num_classes=10)
-
+#model = torchvision.models.resnet18(num_classes=10)
+model = torch.hub.load('pytorch/vision:v0.10.0', 'wide_resnet50_2', pretrained=True) #angie's suggestion to use wide_resnet_40
 #hyperparameters
 MAX_GRAD_NORM = 1.2 #maximum L2 norm of per-sample gradients before they are aggregated by the averaging step
 EPSILON = 6
