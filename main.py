@@ -63,7 +63,7 @@ MAX_GRAD_NORM = 1.0 #maximum L2 norm of per-sample gradients before they are agg
 EPSILON = 6.0
 DELTA = 1e-5 #target of the (epsilon, delta)-DP guarantee. Generally, should be set less than inverse of the size of the training dataset. 
 EPOCHS = 100
-LR = 1e-1
+LR = 1e-2
 
 # "Fix" model since BatchNorm is not DP-compatible
 model = ModuleValidator.fix(model)
