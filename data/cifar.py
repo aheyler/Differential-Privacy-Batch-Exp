@@ -3,7 +3,7 @@ import torch
 
 DATA_ROOT = '../cifar10'
 
-def generate_cifar_datasets(BATCH_SIZE, transform, download=False): 
+def generate_cifar_datasets(BATCH_SIZE, transform, download=True): 
     train_dataset = CIFAR10(
         root=DATA_ROOT, train=True, download=download, transform=transform)
     

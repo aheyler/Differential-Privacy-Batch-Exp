@@ -4,7 +4,7 @@ import data
 from torchvision.datasets import MNIST, EMNIST
 import torch 
 
-def generate_mnist_datasets(BATCH_SIZE, transform, download=False): 
+def generate_mnist_datasets(BATCH_SIZE, transform, download=True): 
     DATA_ROOT = '../mnist'
     train_dataset = MNIST(
         root=DATA_ROOT, train=True, download=download, transform=transform)
