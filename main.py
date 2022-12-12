@@ -56,7 +56,8 @@ else:
 
 ########################## Model Instantiation & Fixing #################################
 # model = WideResnet50()
-model = torchvision.models.resnet18(num_classes=10)
+# model = torchvision.models.resnet18(num_classes=10)
+model = torch.hub.load('pytorch/vision:v0.10.0', 'wide_resnet50_2', pretrained=True) #angie's suggestion to use wide_resnet_40
 
 #hyperparameters
 MAX_GRAD_NORM = 1.0 #maximum L2 norm of per-sample gradients before they are aggregated by the averaging step
