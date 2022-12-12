@@ -61,7 +61,7 @@ model = torch.hub.load('pytorch/vision:v0.10.0', 'wide_resnet50_2', pretrained=T
 
 #hyperparameters
 MAX_GRAD_NORM = 1.2 #maximum L2 norm of per-sample gradients before they are aggregated by the averaging step
-EPSILON = 6
+EPSILON = 10
 DELTA = 1e-5 #target of the (epsilon, delta)-DP guarantee. Generally, should be set less than inverse of the size of the training dataset. 
 EPOCHS = 30
 LR = 1e-5
