@@ -18,7 +18,7 @@ MAC_M1 = False
 # If necessary, they can be computed with modest privacy budgets.
 DATASET = "cifar10"
 BATCH_SIZE = 32
-MAX_PHYSICAL_BATCH_SIZE = 128
+MAX_PHYSICAL_BATCH_SIZE = 64
 
 if DATASET == "cifar10": 
     CIFAR10_MEAN = (0.4914, 0.4822, 0.4465)
@@ -60,11 +60,11 @@ else:
 model = torch.hub.load('pytorch/vision:v0.10.0', 'wide_resnet50_2', pretrained=True) #angie's suggestion to use wide_resnet_40
 
 #hyperparameters
-MAX_GRAD_NORM = 1.0 #maximum L2 norm of per-sample gradients before they are aggregated by the averaging step
-EPSILON = 6.0
+MAX_GRAD_NORM = 1.2 #maximum L2 norm of per-sample gradients before they are aggregated by the averaging step
+EPSILON = 50
 DELTA = 1e-5 #target of the (epsilon, delta)-DP guarantee. Generally, should be set less than inverse of the size of the training dataset. 
-EPOCHS = 100
-LR = 1e-2
+EPOCHS = 50
+LR = 1e-43
 
 # "Fix" model since BatchNorm is not DP-compatible
 model = ModuleValidator.fix(model)
