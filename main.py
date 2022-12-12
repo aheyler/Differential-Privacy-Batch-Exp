@@ -27,7 +27,6 @@ if DATASET == "cifar10":
                     transforms.ToTensor(),
                     transforms.Normalize(CIFAR10_MEAN, CIFAR10_STD_DEV),
                     transforms.RandomHorizontalFlip(p=0.5), 
-                    transforms.RandomCrop(size=(1,1))
                 ])
     train_loader, val_loader, test_loader = generate_cifar_datasets(BATCH_SIZE, transform)
 
