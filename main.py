@@ -13,6 +13,8 @@ from opacus import PrivacyEngine
 # Edit here if running locally
 MAC_M1 = False
 
+import sys
+
 ########################## Data Loading #################################
 # These values, specific to the CIFAR10 dataset, are assumed to be known.
 # If necessary, they can be computed with modest privacy budgets.
@@ -75,9 +77,21 @@ if MAC_M1:
 else: 
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
+
+######################## Logger ##########################################
+sys.stdout = open(f'logfile_lr_{LR}_batch_{BATCH_SIZE}', 'w')
+
 print(f"Using device = {DEVICE}")
 model = model.to(DEVICE)
 
+
+print(f"Training params:")
+print(f"""MAX_GRAD_NORM={MAX_GRAD_NORM}, 
+      EPSILON = {EPSILON}, 
+      DELTA = {DELTA},
+      EPOCHS = {EPOCHS}, 
+      LR = {LR} """)
 
 criterion = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=LR)
