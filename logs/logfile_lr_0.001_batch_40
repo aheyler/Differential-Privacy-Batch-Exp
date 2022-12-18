@@ -1,0 +1,80 @@
+Using device = cuda
+Training params:
+MAX_GRAD_NORM=1.2, 
+      EPSILON = 10, 
+      DELTA = 1e-05,
+      EPOCHS = 30, 
+      LR = 0.001 
+	Train Epoch: 0 	Loss: 9.740201 Acc@1: 4.777181 (ε spent so far = 3.18, δ = 1e-05)
+	Train Epoch: 0 	Loss: 6.329423 Acc@1: 8.101900 (ε spent so far = 3.56, δ = 1e-05)
+	Train Epoch: 0 	Loss: 5.034228 Acc@1: 9.804390 (ε spent so far = 3.80, δ = 1e-05)
+	Train Epoch: 0 	Loss: 4.364014 Acc@1: 10.898721 (ε spent so far = 3.97, δ = 1e-05)
+	Train Epoch: 0 	Loss: 3.952968 Acc@1: 11.742731 (ε spent so far = 4.12, δ = 1e-05)
+	Test set:Loss: 2.291532 Acc: 16.860000 
+	Train Epoch: 1 	Loss: 2.276225 Acc@1: 17.234051 (ε spent so far = 4.24, δ = 1e-05)
+	Train Epoch: 1 	Loss: 2.266264 Acc@1: 17.668718 (ε spent so far = 4.35, δ = 1e-05)
+	Train Epoch: 1 	Loss: 2.256933 Acc@1: 17.907383 (ε spent so far = 4.46, δ = 1e-05)
+	Train Epoch: 1 	Loss: 2.248576 Acc@1: 18.333025 (ε spent so far = 4.55, δ = 1e-05)
+	Train Epoch: 1 	Loss: 2.239193 Acc@1: 18.787426 (ε spent so far = 4.64, δ = 1e-05)
+	Test set:Loss: 2.214170 Acc: 20.320000 
+	Train Epoch: 2 	Loss: 2.187362 Acc@1: 22.083140 (ε spent so far = 4.72, δ = 1e-05)
+	Train Epoch: 2 	Loss: 2.182168 Acc@1: 22.404220 (ε spent so far = 4.80, δ = 1e-05)
+	Train Epoch: 2 	Loss: 2.175469 Acc@1: 23.132873 (ε spent so far = 4.87, δ = 1e-05)
+	Train Epoch: 2 	Loss: 2.169030 Acc@1: 23.295438 (ε spent so far = 4.95, δ = 1e-05)
+	Train Epoch: 2 	Loss: 2.163315 Acc@1: 23.418570 (ε spent so far = 5.02, δ = 1e-05)
+	Test set:Loss: 2.128309 Acc: 24.670000 
+	Train Epoch: 3 	Loss: 2.127141 Acc@1: 24.402590 (ε spent so far = 5.08, δ = 1e-05)
+	Train Epoch: 3 	Loss: 2.114772 Acc@1: 25.681028 (ε spent so far = 5.15, δ = 1e-05)
+	Train Epoch: 3 	Loss: 2.107724 Acc@1: 26.138159 (ε spent so far = 5.21, δ = 1e-05)
+	Train Epoch: 3 	Loss: 2.101298 Acc@1: 26.340638 (ε spent so far = 5.28, δ = 1e-05)
+	Train Epoch: 3 	Loss: 2.095453 Acc@1: 26.527816 (ε spent so far = 5.34, δ = 1e-05)
+	Test set:Loss: 2.058931 Acc: 28.880000 
+	Train Epoch: 4 	Loss: 2.050545 Acc@1: 28.176280 (ε spent so far = 5.40, δ = 1e-05)
+	Train Epoch: 4 	Loss: 2.049808 Acc@1: 28.338086 (ε spent so far = 5.46, δ = 1e-05)
+	Train Epoch: 4 	Loss: 2.044792 Acc@1: 28.896599 (ε spent so far = 5.51, δ = 1e-05)
+	Train Epoch: 4 	Loss: 2.039700 Acc@1: 29.315733 (ε spent so far = 5.57, δ = 1e-05)
+	Train Epoch: 4 	Loss: 2.033936 Acc@1: 29.558446 (ε spent so far = 5.62, δ = 1e-05)
+	Test set:Loss: 2.004942 Acc: 30.920000 
+	Train Epoch: 5 	Loss: 1.998462 Acc@1: 31.849703 (ε spent so far = 5.68, δ = 1e-05)
+	Train Epoch: 5 	Loss: 1.993432 Acc@1: 31.496038 (ε spent so far = 5.73, δ = 1e-05)
+	Train Epoch: 5 	Loss: 1.989217 Acc@1: 31.742472 (ε spent so far = 5.78, δ = 1e-05)
+	Train Epoch: 5 	Loss: 1.984384 Acc@1: 31.716140 (ε spent so far = 5.83, δ = 1e-05)
+	Train Epoch: 5 	Loss: 1.981359 Acc@1: 31.778198 (ε spent so far = 5.89, δ = 1e-05)
+	Test set:Loss: 1.955709 Acc: 32.270000 
+	Train Epoch: 6 	Loss: 1.944882 Acc@1: 34.108557 (ε spent so far = 5.94, δ = 1e-05)
+	Train Epoch: 6 	Loss: 1.940904 Acc@1: 33.974165 (ε spent so far = 5.99, δ = 1e-05)
+	Train Epoch: 6 	Loss: 1.937348 Acc@1: 33.873450 (ε spent so far = 6.03, δ = 1e-05)
+	Train Epoch: 6 	Loss: 1.932922 Acc@1: 34.021619 (ε spent so far = 6.08, δ = 1e-05)
+	Train Epoch: 6 	Loss: 1.928722 Acc@1: 34.193894 (ε spent so far = 6.13, δ = 1e-05)
+	Test set:Loss: 1.895421 Acc: 35.470000 
+	Train Epoch: 7 	Loss: 1.894404 Acc@1: 35.452068 (ε spent so far = 6.18, δ = 1e-05)
+	Train Epoch: 7 	Loss: 1.893662 Acc@1: 35.340052 (ε spent so far = 6.22, δ = 1e-05)
+	Train Epoch: 7 	Loss: 1.889338 Acc@1: 35.570644 (ε spent so far = 6.27, δ = 1e-05)
+	Train Epoch: 7 	Loss: 1.882637 Acc@1: 35.895868 (ε spent so far = 6.31, δ = 1e-05)
+	Train Epoch: 7 	Loss: 1.879540 Acc@1: 35.835430 (ε spent so far = 6.36, δ = 1e-05)
+	Test set:Loss: 1.859838 Acc: 35.570000 
+	Train Epoch: 8 	Loss: 1.855747 Acc@1: 36.722445 (ε spent so far = 6.40, δ = 1e-05)
+	Train Epoch: 8 	Loss: 1.845966 Acc@1: 37.182160 (ε spent so far = 6.45, δ = 1e-05)
+	Train Epoch: 8 	Loss: 1.841983 Acc@1: 37.093278 (ε spent so far = 6.49, δ = 1e-05)
+	Train Epoch: 8 	Loss: 1.835570 Acc@1: 37.108363 (ε spent so far = 6.53, δ = 1e-05)
+	Train Epoch: 8 	Loss: 1.829412 Acc@1: 37.245433 (ε spent so far = 6.58, δ = 1e-05)
+	Test set:Loss: 1.807077 Acc: 37.230000 
+	Train Epoch: 9 	Loss: 1.791901 Acc@1: 37.320473 (ε spent so far = 6.62, δ = 1e-05)
+	Train Epoch: 9 	Loss: 1.795597 Acc@1: 37.609346 (ε spent so far = 6.66, δ = 1e-05)
+	Train Epoch: 9 	Loss: 1.797274 Acc@1: 37.437205 (ε spent so far = 6.70, δ = 1e-05)
+	Train Epoch: 9 	Loss: 1.795618 Acc@1: 37.762753 (ε spent so far = 6.75, δ = 1e-05)
+	Train Epoch: 9 	Loss: 1.791689 Acc@1: 37.879626 (ε spent so far = 6.79, δ = 1e-05)
+	Test set:Loss: 1.771907 Acc: 39.140000 
+	Train Epoch: 10 	Loss: 1.747056 Acc@1: 38.774524 (ε spent so far = 6.83, δ = 1e-05)
+	Train Epoch: 10 	Loss: 1.747474 Acc@1: 39.069443 (ε spent so far = 6.87, δ = 1e-05)
+	Train Epoch: 10 	Loss: 1.744716 Acc@1: 39.295682 (ε spent so far = 6.91, δ = 1e-05)
+	Train Epoch: 10 	Loss: 1.739186 Acc@1: 39.582239 (ε spent so far = 6.95, δ = 1e-05)
+	Train Epoch: 10 	Loss: 1.736088 Acc@1: 39.606756 (ε spent so far = 6.99, δ = 1e-05)
+	Test set:Loss: 1.725063 Acc: 39.690000 
+	Train Epoch: 11 	Loss: 1.739802 Acc@1: 39.074166 (ε spent so far = 7.03, δ = 1e-05)
+	Train Epoch: 11 	Loss: 1.725967 Acc@1: 39.872891 (ε spent so far = 7.07, δ = 1e-05)
+	Train Epoch: 11 	Loss: 1.722489 Acc@1: 39.967015 (ε spent so far = 7.10, δ = 1e-05)
+	Train Epoch: 11 	Loss: 1.712453 Acc@1: 40.407442 (ε spent so far = 7.14, δ = 1e-05)
+	Train Epoch: 11 	Loss: 1.707969 Acc@1: 40.810477 (ε spent so far = 7.18, δ = 1e-05)
+	Test set:Loss: 1.699237 Acc: 39.950000 
+	Train Epoch: 12 	Loss: 1.698247 Acc@1: 41.434388 (ε spent so far = 7.22, δ = 1e-05)
